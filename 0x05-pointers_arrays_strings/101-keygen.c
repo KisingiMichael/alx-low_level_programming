@@ -2,31 +2,52 @@
 #include <stdlib.h>
 #include <time.h>
 
-/** 
- *main- genrate password
- *Return: Alway 0
+/**
+ * main - generates random passwords
+ * Return: 0
  */
+
 int main(void)
 {
-srand((unsigned int)time(NULL));
-char pass[13];
-int i;
+	char password[84];
+	int index = 0, sum = 0, diff_half1, diff_half2;
 
+	srand(time(0));
 
-for (i = 0; i < 4; i++)
-{
+	while (sum <= 2772)
+	{
+		password[index] = 33 + rand() % 94;
+		sum += password[index++];
+	}
+	password[index] = '\n';
 
-pass[3 * i] = '0' + (rand() % 10);
-char capLetter = 'A' + (rand() % 26);
+	if (sum != 2772)
+	{
+		diff_half1 = (sum - 2772) / 2;
+		diff_half2 = (sum - 2772) / 2;
 
-pass[(3 * i) + 1] = capLetter;
-char letter = 'a' + (rand() % 26);
+		if ((sum - 2772) % 2 != 0)
+		diff_half1++;
+		
+		for (index = 0; password[index]; index++)
+		{
+			if (password[index] >= (33 + diff_half1))
+			{
+				password[index] -=diff_half1;
+				break;
+			}
+		}
+		
+		for (index = 0; password[index]; index++)
+		{
+			 if (password[index] >= (33 + diff_half2))
+                        {
+                                password[index] -= diff_half2;
+                                break;
+                        }
+                }
 
-pass[(3 * i) + 2] = letter;
-}
-pass[3 * i] = '\0';
-printf("generated password : %s\n\n", pass);
-
-printf("\n\n");
-return (0);
+	}
+	printf("%s", password);
+	return (0);
 }
