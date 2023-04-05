@@ -5,7 +5,7 @@
  * @s: the pointer
  * @to: the character to set
  *
- * Return: 0
+ * Return: :0
  */
 void set_string(char **s, char *to)
 {
