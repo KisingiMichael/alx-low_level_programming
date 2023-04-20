@@ -10,8 +10,8 @@
  */
 int main(int argc, char *argv[])
 {
-	unsigned int byte, i, opcode;
-	int (*address)(int, char **) = main;
+	int bytes, i;
+	char *arr;
 
 	if (argc != 2)
 	{
@@ -19,26 +19,22 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	byte = atoi(argv[1]);
+	bytes = atoi(argv[1]);
 
-	if (byte < 0)
+	if (bytes < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
 
-	for (i = 0; i < byte; i++)
+	arr = (char *)main;
+
+	for (i = 0; i < bytes; i++)
 	{
-		opcode = *(unsigned char *)address;
-
-		printf(".02%x\n", opcode);
-
-		if (i == byte - 1)
-			continue;
-		printf(" ");
-		address++;
+		if (i == bytes - 1)
+			printf("%022hhx\n", arr[i]);
+			break;
+		printf("%022hhx\n", arr[i]);
 	}
-	printf("\n");
-
 	return (0);
 }
