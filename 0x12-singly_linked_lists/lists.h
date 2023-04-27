@@ -6,7 +6,9 @@
  * struct list_s - singly linked list
  * @str: string
  * @node_len: String legth
- * @next: 
+ * @next: next node
+ *
+ * Dscription: Singly linked list 
  */
 typedef struct list_s
 {
